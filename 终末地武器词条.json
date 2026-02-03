@@ -1,0 +1,498 @@
+[
+  {
+    "装备名称": "使命必达",
+    "稀有度": "红色",
+    "图片URL": "https://zmdwiki.com/assets/images/weapons/5d078dc9ff25d344de5629a76c3e7b6b.png",
+    "能力值提升": "智识提升",
+    "属性提升": "终结技充能效率提升",
+    "系列技能": "追袭"
+  },
+  {
+    "装备名称": "艺术暴君",
+    "稀有度": "红色",
+    "图片URL": "https://zmdwiki.com/assets/images/weapons/66cc7d14dddc8b486364ce2363b6adda.png",
+    "能力值提升": "智识提升",
+    "属性提升": "暴击率提升",
+    "系列技能": "切骨"
+  },
+  {
+    "装备名称": "爆破单元",
+    "稀有度": "红色",
+    "图片URL": "https://zmdwiki.com/assets/images/weapons/b4a90aaea26844d605b88a8eca3d9f85.png",
+    "能力值提升": "智识提升",
+    "属性提升": "源石技艺强度提升",
+    "系列技能": "进发"
+  },
+  {
+    "装备名称": "J.E.T",
+    "稀有度": "红色",
+    "图片URL": "https://zmdwiki.com/assets/images/weapons/7ea6fda78e8ed859112768f41d294135.png",
+    "能力值提升": "意志提升",
+    "属性提升": "攻击提升",
+    "系列技能": "压制"
+  },
+  {
+    "装备名称": "不知归",
+    "稀有度": "红色",
+    "图片URL": "https://zmdwiki.com/assets/images/weapons/1f6c6779adca65f349b5ba0fede248cc.png",
+    "能力值提升": "意志提升",
+    "属性提升": "攻击提升",
+    "系列技能": "流转"
+  },
+  {
+    "装备名称": "作品：蚀象",
+    "稀有度": "红色",
+    "图片URL": "https://zmdwiki.com/assets/images/weapons/206398230aa76ff409dc4bf696dd0e4d.png",
+    "能力值提升": "主能力提升",
+    "属性提升": "攻击提升",
+    "系列技能": "压制"
+  },
+  {
+    "装备名称": "典范",
+    "稀有度": "红色",
+    "图片URL": "https://zmdwiki.com/assets/images/weapons/dae902519985b07a6f1825933f5eb545.png",
+    "能力值提升": "力量提升",
+    "属性提升": "攻击提升",
+    "系列技能": "压制"
+  },
+  {
+    "装备名称": "同类相食",
+    "稀有度": "红色",
+    "图片URL": "https://zmdwiki.com/assets/images/weapons/554ebf0c7a815506538b20bf01f3c279.png",
+    "能力值提升": "力量提升",
+    "属性提升": "攻击提升",
+    "系列技能": "附术"
+  },
+  {
+    "装备名称": "大雷斑",
+    "稀有度": "红色",
+    "图片URL": "https://zmdwiki.com/assets/images/weapons/8c92c8afba87482f3fb0d918bd44167b.png",
+    "能力值提升": "力量提升",
+    "属性提升": "生命提升",
+    "系列技能": "医疗"
+  },
+  {
+    "装备名称": "宏愿",
+    "稀有度": "红色",
+    "图片URL": "https://zmdwiki.com/assets/images/weapons/c9713c1d4deeb6352eabfbb38dff0961.png",
+    "能力值提升": "敏捷提升",
+    "属性提升": "攻击提升",
+    "系列技能": "附术"
+  },
+  {
+    "装备名称": "扶摇",
+    "稀有度": "红色",
+    "图片URL": "https://zmdwiki.com/assets/images/weapons/1a5102bf38040b123846906ec1a62ba4.png",
+    "能力值提升": "敏捷提升",
+    "属性提升": "暴击率提升",
+    "系列技能": "夜幕"
+  },
+  {
+    "装备名称": "昔日精品",
+    "稀有度": "红色",
+    "图片URL": "https://zmdwiki.com/assets/images/weapons/512be003fe4d01f224fdb368163b7ba2.png",
+    "能力值提升": "意志提升",
+    "属性提升": "生命提升",
+    "系列技能": "效益"
+  },
+  {
+    "装备名称": "显赫声名",
+    "稀有度": "红色",
+    "图片URL": "https://zmdwiki.com/assets/images/weapons/2df0f73357c4793b5342a269cb277a86.png",
+    "能力值提升": "敏捷提升",
+    "属性提升": "物理伤害提升",
+    "系列技能": "残暴"
+  },
+  {
+    "装备名称": "楔子",
+    "稀有度": "红色",
+    "图片URL": "https://zmdwiki.com/assets/images/weapons/1acd37e11e3b2b15b9c96341496608dc.png",
+    "能力值提升": "智识提升",
+    "属性提升": "攻击提升",
+    "系列技能": "附术"
+  },
+  {
+    "装备名称": "沧溟星梦",
+    "稀有度": "红色",
+    "图片URL": "https://zmdwiki.com/assets/images/weapons/8877b231ab331837d0aa12a12b6d8184.png",
+    "能力值提升": "智识提升",
+    "属性提升": "治疗效率提升",
+    "系列技能": "附术"
+  },
+  {
+    "装备名称": "热熔切割器",
+    "稀有度": "红色",
+    "图片URL": "https://zmdwiki.com/assets/images/weapons/9ebcdee862c8f6293f45d4f0458c5244.png",
+    "能力值提升": "意志提升",
+    "属性提升": "攻击提升",
+    "系列技能": "流转"
+  },
+  {
+    "装备名称": "熔铸火焰",
+    "稀有度": "红色",
+    "图片URL": "https://zmdwiki.com/assets/images/weapons/a2fc188efeb10de2af2da9678d333853.png",
+    "能力值提升": "智识提升",
+    "属性提升": "攻击提升",
+    "系列技能": "夜幕"
+  },
+  {
+    "装备名称": "白夜新星",
+    "稀有度": "红色",
+    "图片URL": "https://zmdwiki.com/assets/images/weapons/d160327332e2c2ef4845d6594dcb830a.png",
+    "能力值提升": "智识提升",
+    "属性提升": "源石技艺强度提升",
+    "系列技能": "附术"
+  },
+  {
+    "装备名称": "破碎君王",
+    "稀有度": "红色",
+    "图片URL": "https://zmdwiki.com/assets/images/weapons/4b89816e49cfa10aae0a1dabcef731af.png",
+    "能力值提升": "力量提升",
+    "属性提升": "攻击提升",
+    "系列技能": "粉碎"
+  },
+  {
+    "装备名称": "负山",
+    "稀有度": "红色",
+    "图片URL": "https://zmdwiki.com/assets/images/weapons/b66dd0f5e61f2a3231f6faf661daba62.png",
+    "能力值提升": "敏捷提升",
+    "属性提升": "物理伤害提升",
+    "系列技能": "效益"
+  },
+  {
+    "装备名称": "赫拉芬格",
+    "稀有度": "红色",
+    "图片URL": "https://zmdwiki.com/assets/images/weapons/042aba63b6335eb4df880e5fc4d24737.png",
+    "能力值提升": "力量提升",
+    "属性提升": "寒冷伤害提升",
+    "系列技能": "进发"
+  },
+  {
+    "装备名称": "遗忘",
+    "稀有度": "红色",
+    "图片URL": "https://zmdwiki.com/assets/images/weapons/dcd32e34b669310c992f590b65c7460a.png",
+    "能力值提升": "智识提升",
+    "属性提升": "攻击提升",
+    "系列技能": "夜幕"
+  },
+  {
+    "装备名称": "领航者",
+    "稀有度": "红色",
+    "图片URL": "https://zmdwiki.com/assets/images/weapons/02189f8c94d87b592a9b64a73ddd0e4b.png",
+    "能力值提升": "主能力提升",
+    "属性提升": "终结技充能效率提升",
+    "系列技能": "附术"
+  },
+  {
+    "装备名称": "骁勇",
+    "稀有度": "红色",
+    "图片URL": "https://zmdwiki.com/assets/images/weapons/6609d9a542d7b96db8f336bbcf2d09aa.png",
+    "能力值提升": "敏捷提升",
+    "属性提升": "物理伤害提升",
+    "系列技能": "巧技"
+  },
+  {
+    "装备名称": "骑士精神",
+    "稀有度": "红色",
+    "图片URL": "https://zmdwiki.com/assets/images/weapons/32c182c9c477a89326127ade660818c7.png",
+    "能力值提升": "意志提升",
+    "属性提升": "生命提升",
+    "系列技能": "医疗"
+  },
+  {
+    "装备名称": "黯色火炬",
+    "稀有度": "红色",
+    "图片URL": "https://zmdwiki.com/assets/images/weapons/8182e1845511b4c3c880eff94d757c8a.png",
+    "能力值提升": "主能力提升",
+    "属性提升": "灼热伤害提升",
+    "系列技能": "附术"
+  },
+  {
+    "装备名称": "嵌合正义",
+    "稀有度": "金色",
+    "图片URL": "https://zmdwiki.com/assets/images/weapons/c42d7a5b14ed540ab7ad51aabce58c23.png",
+    "能力值提升": "力量提升",
+    "属性提升": "终结技充能效率提升",
+    "系列技能": "残暴"
+  },
+  {
+    "装备名称": "O.B.J.尖峰",
+    "稀有度": "金色",
+    "图片URL": "https://zmdwiki.com/assets/images/weapons/e095766c36d7e1333d92022e32bdc51f.png",
+    "能力值提升": "意志提升",
+    "属性提升": "物理伤害提升",
+    "系列技能": "附术"
+  },
+  {
+    "装备名称": "O.B.J.术识",
+    "稀有度": "金色",
+    "图片URL": "https://zmdwiki.com/assets/images/weapons/3eb6c675b1cc34f15a51ac91a3271eb2.png",
+    "能力值提升": "智识提升",
+    "属性提升": "源石技艺强度提升",
+    "系列技能": "追袭"
+  },
+  {
+    "装备名称": "O.B.J.轻芒",
+    "稀有度": "金色",
+    "图片URL": "https://zmdwiki.com/assets/images/weapons/0db581027783e76ea934a59de8e93c6d.png",
+    "能力值提升": "敏捷提升",
+    "属性提升": "攻击提升",
+    "系列技能": "流转"
+  },
+  {
+    "装备名称": "O.B.J.迅极",
+    "稀有度": "金色",
+    "图片URL": "https://zmdwiki.com/assets/images/weapons/f0b1e7a2328545796cc0c2f7059bb814.png",
+    "能力值提升": "敏捷提升",
+    "属性提升": "终结技充能效率提升",
+    "系列技能": "进发"
+  },
+  {
+    "装备名称": "O.B.J.重荷",
+    "稀有度": "金色",
+    "图片URL": "https://zmdwiki.com/assets/images/weapons/8523a3816bdbee0e98378020a3fcc050.png",
+    "能力值提升": "力量提升",
+    "属性提升": "生命提升",
+    "系列技能": "效益"
+  },
+  {
+    "装备名称": "仰止",
+    "稀有度": "金色",
+    "图片URL": "https://zmdwiki.com/assets/images/weapons/fdfe839292c5cd09cf004e2b46a51d64.png",
+    "能力值提升": "敏捷提升",
+    "属性提升": "物理伤害提升",
+    "系列技能": "夜幕"
+  },
+  {
+    "装备名称": "作品：众生",
+    "稀有度": "金色",
+    "图片URL": "https://zmdwiki.com/assets/images/weapons/77eaad93c9cbca0b93eb751096f25249.png",
+    "能力值提升": "敏捷提升",
+    "属性提升": "法术提升",
+    "系列技能": "附术"
+  },
+  {
+    "装备名称": "十二问",
+    "稀有度": "金色",
+    "图片URL": "https://zmdwiki.com/assets/images/weapons/bcb166bc49feaae0696feebb07e78151.png",
+    "能力值提升": "敏捷提升",
+    "属性提升": "攻击提升",
+    "系列技能": "附术"
+  },
+  {
+    "装备名称": "古渠",
+    "稀有度": "金色",
+    "图片URL": "https://zmdwiki.com/assets/images/weapons/bcbbdc567a6669180d8fb3f04b2764f0.png",
+    "能力值提升": "力量提升",
+    "属性提升": "源石技艺强度提升",
+    "系列技能": "残暴"
+  },
+  {
+    "装备名称": "向心之引",
+    "稀有度": "金色",
+    "图片URL": "https://zmdwiki.com/assets/images/weapons/f7f39b12b903768c1ae9f93ee53bdf31.png",
+    "能力值提升": "意志提升",
+    "属性提升": "电磁伤害提升",
+    "系列技能": "压制"
+  },
+  {
+    "装备名称": "坚城铸造者",
+    "稀有度": "金色",
+    "图片URL": "https://zmdwiki.com/assets/images/weapons/e17c0309213d793af7e3cdd44fc371d2.png",
+    "能力值提升": "智识提升",
+    "属性提升": "法术提升",
+    "系列技能": "昂扬"
+  },
+  {
+    "装备名称": "布道自由",
+    "稀有度": "金色",
+    "图片URL": "https://zmdwiki.com/assets/images/weapons/bbf6347d2ffc05b093f5bfeb55cf2c7e.png",
+    "能力值提升": "意志提升",
+    "属性提升": "治疗效率提升",
+    "系列技能": "医疗"
+  },
+  {
+    "装备名称": "悼亡诗",
+    "稀有度": "金色",
+    "图片URL": "https://zmdwiki.com/assets/images/weapons/95fbd3b55a30e5c185a5aaa52d3c53b9.png",
+    "能力值提升": "智识提升",
+    "属性提升": "攻击提升",
+    "系列技能": "夜幕"
+  },
+  {
+    "装备名称": "探骊",
+    "稀有度": "金色",
+    "图片URL": "https://zmdwiki.com/assets/images/weapons/70a3e5bec50c830be1ea0e08c7d8139e.png",
+    "能力值提升": "力量提升",
+    "属性提升": "终结技充能效率提升",
+    "系列技能": "进发"
+  },
+  {
+    "装备名称": "理性告别",
+    "稀有度": "金色",
+    "图片URL": "https://zmdwiki.com/assets/images/weapons/7206719906e32db051ed6cba0bb0e8c3.png",
+    "能力值提升": "力量提升",
+    "属性提升": "灼热伤害提升",
+    "系列技能": "追袭"
+  },
+  {
+    "装备名称": "终点之声",
+    "稀有度": "金色",
+    "图片URL": "https://zmdwiki.com/assets/images/weapons/94e1b2da1900c1dcab313abf4c3ff144.png",
+    "能力值提升": "力量提升",
+    "属性提升": "生命提升",
+    "系列技能": "医疗"
+  },
+  {
+    "装备名称": "莫奈何",
+    "稀有度": "金色",
+    "图片URL": "https://zmdwiki.com/assets/images/weapons/1f6cb3f00ad85bebf25cc6e8474e54b9.png",
+    "能力值提升": "意志提升",
+    "属性提升": "终结技充能效率提升",
+    "系列技能": "昂扬"
+  },
+  {
+    "装备名称": "迷失荒野",
+    "稀有度": "金色",
+    "图片URL": "https://zmdwiki.com/assets/images/weapons/2b97ff8a90a560307bf2c94bfb27c94c.png",
+    "能力值提升": "智识提升",
+    "属性提升": "电磁伤害提升",
+    "系列技能": "附术"
+  },
+  {
+    "装备名称": "逐鳞3.0",
+    "稀有度": "金色",
+    "图片URL": "https://zmdwiki.com/assets/images/weapons/db139a2c484555ad2fd7195d6e26bdfe.png",
+    "能力值提升": "力量提升",
+    "属性提升": "终结技充能效率提升",
+    "系列技能": "压制"
+  },
+  {
+    "装备名称": "钢铁余音",
+    "稀有度": "金色",
+    "图片URL": "https://zmdwiki.com/assets/images/weapons/70ad85b123f1e2951d0ccaa9cc91a74d.png",
+    "能力值提升": "敏捷提升",
+    "属性提升": "物理伤害提升",
+    "系列技能": "巧技"
+  },
+  {
+    "装备名称": "全自动骇新星",
+    "稀有度": "紫色",
+    "图片URL": "https://zmdwiki.com/assets/images/weapons/ccc3b65a8207dc28230d79c3e6712dd6.png",
+    "能力值提升": "智识提升",
+    "属性提升": "法术提升",
+    "系列技能": "昂扬"
+  },
+  {
+    "装备名称": "天使杀手",
+    "稀有度": "紫色",
+    "图片URL": "https://zmdwiki.com/assets/images/weapons/9e04d4ffec20c4ab01124d70d03de4f1.png",
+    "能力值提升": "意志提升",
+    "属性提升": "法术提升",
+    "系列技能": "压制"
+  },
+  {
+    "装备名称": "寻路者道标",
+    "稀有度": "紫色",
+    "图片URL": "https://zmdwiki.com/assets/images/weapons/6e5bc7e0d57ac37559065cc82f53d8ff.png",
+    "能力值提升": "敏捷提升",
+    "属性提升": "攻击提升",
+    "系列技能": "昂扬"
+  },
+  {
+    "装备名称": "应急手段",
+    "稀有度": "紫色",
+    "图片URL": "https://zmdwiki.com/assets/images/weapons/65e1458975f4ababad8bd1ded748548e.png",
+    "能力值提升": "敏捷提升",
+    "属性提升": "物理伤害提升",
+    "系列技能": "压制"
+  },
+  {
+    "装备名称": "浪潮",
+    "稀有度": "紫色",
+    "图片URL": "https://zmdwiki.com/assets/images/weapons/3317a144172918cd4eb563d82c183e75.png",
+    "能力值提升": "智识提升",
+    "属性提升": "攻击提升",
+    "系列技能": "追袭"
+  },
+  {
+    "装备名称": "呼啸守卫",
+    "稀有度": "紫色",
+    "图片URL": "https://zmdwiki.com/assets/images/weapons/26fcb2fc51763fe854487b11e6c77ab0.png",
+    "能力值提升": "智识提升",
+    "属性提升": "攻击提升",
+    "系列技能": "压制"
+  },
+  {
+    "装备名称": "工业零点一",
+    "稀有度": "紫色",
+    "图片URL": "https://zmdwiki.com/assets/images/weapons/9fe7c7376ba7dfc1deee82a9f6a81839.png",
+    "能力值提升": "力量提升",
+    "属性提升": "攻击提升",
+    "系列技能": "压制"
+  },
+  {
+    "装备名称": "淬火者",
+    "稀有度": "紫色",
+    "图片URL": "https://zmdwiki.com/assets/images/weapons/a39ffbb3cc99fca1bacb5ba4df28454a.png",
+    "能力值提升": "意志提升",
+    "属性提升": "生命提升",
+    "系列技能": "粉碎"
+  },
+  {
+    "装备名称": "荧光雷羽",
+    "稀有度": "紫色",
+    "图片URL": "https://zmdwiki.com/assets/images/weapons/9ded3030a865f308d814abeac16b54ec.png",
+    "能力值提升": "意志提升",
+    "属性提升": "攻击提升",
+    "系列技能": "压制"
+  },
+  {
+    "装备名称": "长路",
+    "稀有度": "紫色",
+    "图片URL": "https://zmdwiki.com/assets/images/weapons/06321449b030edf3d7b35647de06aad3.png",
+    "能力值提升": "力量提升",
+    "属性提升": "法术提升",
+    "系列技能": "追袭"
+  },
+  {
+    "装备名称": "佩科5",
+    "稀有度": "白色",
+    "图片URL": "https://zmdwiki.com/assets/images/weapons/3985d7772255bd30802f9342d8cc9f48.png",
+    "能力值提升": "主能力提升",
+    "属性提升": "",
+    "系列技能": "强攻"
+  },
+  {
+    "装备名称": "吉米尼12",
+    "稀有度": "白色",
+    "图片URL": "https://zmdwiki.com/assets/images/weapons/60c1b5283a0d13ef7000797687656f0d.png",
+    "能力值提升": "主能力提升",
+    "属性提升": "",
+    "系列技能": "强攻"
+  },
+  {
+    "装备名称": "塔尔11",
+    "稀有度": "白色",
+    "图片URL": "https://zmdwiki.com/assets/images/weapons/43cfa19fb2698d35514f5476a2010df3.png",
+    "能力值提升": "主能力提升",
+    "属性提升": "",
+    "系列技能": "强攻"
+  },
+  {
+    "装备名称": "奥佩罗77",
+    "稀有度": "白色",
+    "图片URL": "https://zmdwiki.com/assets/images/weapons/7aeb5b0e8bd8d49a1911280616f1fce3.png",
+    "能力值提升": "主能力提升",
+    "属性提升": "",
+    "系列技能": "强攻"
+  },
+  {
+    "装备名称": "达尔霍夫7",
+    "稀有度": "白色",
+    "图片URL": "https://zmdwiki.com/assets/images/weapons/44e1128c37bf8156fc66f339f2480edc.png",
+    "能力值提升": "主能力提升",
+    "属性提升": "",
+    "系列技能": "强攻"
+  }
+]

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>终末地武器基质筛选器</title>
+    <script src="data.js"></script>
+    <style>
+        :root {
+            --bg-body: #f5f7fa; /* TableConvert 风格浅灰背景 */
+            --bg-block: #ffffff;
+            --text-main: #333333;
+            --text-dim: #666666;
+            --accent: #007bff;
+            --border: #e2e8f0;
+            
+            /* 稀有度颜色映射 */
+            --color-红色: #ff4d4f;
+            --color-金色: #faad14;
+            --color-紫色: #a335ee;
+            --color-白色: #d9d9d9;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .main-container { max-width: 900px; margin: 0 auto; }
+        
+        h1 { text-align: center; font-weight: 500; margin-bottom: 30px; }
+
+        /* 白色区块分割 */
+        .white-block {
+            background: var(--bg-block);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+
+        .block-header {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* 筛选按钮 */
+        .filter-row { margin-bottom: 15px; }
+        .filter-label { font-size: 0.85rem; color: var(--text-dim); margin-bottom: 8px; }
+        .filter-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+        
+        .tag-btn {
+            background: #fff;
+            border: 1px solid var(--border);
+            padding: 5px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+        .tag-btn:hover { background: #f8f9fa; }
+        .tag-btn.active {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+        }
+
+        /* 装备卡片 */
+        .item-card {
+            display: flex;
+            background: var(--bg-block);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            margin-bottom: 10px;
+            height: 70px;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .rarity-line { width: 5px; height: 100%; flex-shrink: 0; }
+        
+        .item-icon {
+            width: 45px;
+            height: 45px;
+            background: #eee;
+            margin: 0 15px;
+            border-radius: 4px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: #ccc;
+        }
+        .item-icon img { width: 100%; height: 100%; object-fit: cover; }
+
+        .item-name-box { width: 180px; flex-shrink: 0; }
+        .item-name { font-weight: 600; font-size: 0.95rem; }
+
+        .item-affixes {
+            flex: 1;
+            display: flex;
+            gap: 12px;
+        }
+        .affix-text { font-size: 0.85rem; color: var(--text-dim); }
+        .affix-text.match { color: var(--accent); font-weight: bold; }
+
+        .item-farm-check {
+            width: 100px;
+            padding: 0 15px;
+            border-left: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 600px) {
+            .item-card { height: auto; flex-direction: column; padding: 15px 10px; position: relative; }
+            .rarity-line { position: absolute; left: 0; top: 0; width: 100%; height: 4px; }
+            .item-name-box { width: 100%; margin-top: 5px; }
+            .item-affixes { width: 100%; margin: 10px 0; }
+            .item-farm-check { width: 100%; border-left: none; border-top: 1px solid var(--border); padding-top: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="main-container">
+    <h1>终末地武器基质筛选器</h1>
+
+    <div class="white-block">
+        <div class="block-header">词条过滤</div>
+        <div id="filter-area"></div>
+    </div>
+
+    <div id="list-area"></div>
+</div>
+
+<script>
+    // 定义筛选器结构
+    const filterConfig = {
+        "能力值提升": ["敏捷提升", "力量提升",  "意志提升", "智识提升", "主能力提升"],
+        "属性提升": ["攻击提升", "生命提升", "物理伤害提升", "暴击率提升", "源石技艺强度提升", "终结技充能效率提升", "治疗效率提升", "法术提升", "寒冷伤害提升", "灼热伤害提升", "电磁伤害提升"],
+        "系列技能": ["追袭", "切骨", "进发", "压制", "流转", "附术", "医疗", "效益", "夜幕", "残暴", "昂扬", "巧技", "粉碎", "强攻"]
+    };
+
+    // 状态管理
+    let selectedTags = new Set();
+    const FARMED_KEY = 'endfield_farmed_v1';
+    let farmedMap = JSON.parse(localStorage.getItem(FARMED_KEY)) || {};
+
+    // 核心初始化
+    function init() {
+        renderFilters();
+        renderList();
+    }
+
+    function renderFilters() {
+        const container = document.getElementById('filter-area');
+        for (const [groupName, tags] of Object.entries(filterConfig)) {
+            const row = document.createElement('div');
+            row.className = 'filter-row';
+            row.innerHTML = `<div class="filter-label">${groupName}</div>`;
+            
+            const tagBox = document.createElement('div');
+            tagBox.className = 'filter-tags';
+            
+            tags.forEach(tag => {
+                const btn = document.createElement('button');
+                btn.className = 'tag-btn';
+                btn.textContent = tag;
+                btn.onclick = () => {
+                    btn.classList.toggle('active');
+                    selectedTags.has(tag) ? selectedTags.delete(tag) : selectedTags.add(tag);
+                    renderList();
+                };
+                tagBox.appendChild(btn);
+            });
+            
+            row.appendChild(tagBox);
+            container.appendChild(row);
+        }
+    }
+
+    function renderList() {
+        const container = document.getElementById('list-area');
+        container.innerHTML = '';
+
+        // 筛选逻辑
+        const filtered = equipmentData.filter(item => {
+            if (selectedTags.size === 0) return true;
+            // 检查 item 是否包含选中的所有标签
+            return [...selectedTags].every(tag => 
+                item["能力值提升"] === tag || 
+                item["属性提升"] === tag || 
+                item["系列技能"] === tag
+            );
+        });
+
+        // 排序：按稀有度（这里简单按字母，因为刚好红色排在前面，或者你可以定义权重）
+        const weight = {"红色": 4, "金色": 3, "紫色": 2, "白色": 1};
+        filtered.sort((a, b) => weight[b["稀有度"]] - weight[a["稀有度"]]);
+
+        filtered.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'item-card';
+            
+            // 稀有度颜色获取：从 CSS 变量中读取
+            const rColor = `var(--color-${item["稀有度"]})`;
+
+            card.innerHTML = `
+                <div class="rarity-line" style="background: ${rColor}"></div>
+                <div class="item-icon">
+                    ${item["图片URL"] ? `<img src="${item["图片URL"]}">` : 'No Img'}
+                </div>
+                <div class="item-name-box">
+                    <div class="item-name" style="color: ${rColor}">${item["装备名称"]}</div>
+                </div>
+                <div class="item-affixes">
+                    <span class="affix-text ${selectedTags.has(item["能力值提升"]) ? 'match' : ''}">${item["能力值提升"] || ''}</span>
+                    <span class="affix-text ${selectedTags.has(item["属性提升"]) ? 'match' : ''}">${item["属性提升"] || ''}</span>
+                    <span class="affix-text ${selectedTags.has(item["系列技能"]) ? 'match' : ''}">${item["系列技能"] || ''}</span>
+                </div>
+                <div class="item-farm-check">
+                    <input type="checkbox" ${farmedMap[item["装备名称"]] ? 'checked' : ''} 
+                        onchange="toggleFarmed('${item["装备名称"]}', this.checked)">
+                    <span>已刷取</span>
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    function toggleFarmed(name, isChecked) {
+        farmedMap[name] = isChecked;
+        localStorage.setItem(FARMED_KEY, JSON.stringify(farmedMap));
+    }
+
+    init();
+</script>
+</body>
+</html>
