@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>终末地武器基质筛选器</title>
-    <script src="data.js"></script>
     <style>
         :root {
             --bg-body: #f5f7fa; /* TableConvert 风格浅灰背景 */
@@ -18,7 +17,7 @@
             --color-红色: #ff4d4f;
             --color-金色: #faad14;
             --color-紫色: #a335ee;
-            --color-白色: #d9d9d9;
+            --color-白色: #999999;
         }
 
         body {
@@ -100,6 +99,7 @@
             justify-content: center;
             font-size: 10px;
             color: #ccc;
+            flex-shrink: 0;
         }
         .item-icon img { width: 100%; height: 100%; object-fit: cover; }
 
@@ -142,7 +142,7 @@
 
     <div class="white-block">
         <div class="block-header">词条过滤</div>
-        <div id="filter-area"></div>
+        <div id="filter-area">正在读取数据...</div>
     </div>
 
     <div id="list-area"></div>
@@ -152,16 +152,30 @@
     // 定义筛选器结构
     const filterConfig = {
         "能力值提升": ["敏捷提升", "力量提升",  "意志提升", "智识提升", "主能力提升"],
-        "属性提升": ["攻击提升", "生命提升", "物理伤害提升", "暴击率提升", "源石技艺强度提升", "终结技充能效率提升", "治疗效率提升", "法术提升", "寒冷伤害提升", "灼热伤害提升", "电磁伤害提升"],
-        "系列技能": ["追袭", "切骨", "进发", "压制", "流转", "附术", "医疗", "效益", "夜幕", "残暴", "昂扬", "巧技", "粉碎", "强攻"]
+        "属性提升": ["攻击提升", "生命提升", "物理伤害提升", "灼热伤害提升", "电磁伤害提升", "寒冷伤害提升", "自然伤害提升", "暴击率提升", "源氏技艺提升", "终结技效率提升", "法术伤害提升", "治疗效率提升"],
+        "系列技能": ["强攻", "压制", "追袭", "粉碎", "昂扬", "巧技", "残暴", "附术", "医疗", "切骨", "进发", "夜幕", "流转", "效益"]
     };
 
     // 状态管理
+    let equipmentData = []; // 用于存放从 json 加载的数据
     let selectedTags = new Set();
     const FARMED_KEY = 'endfield_farmed_v1';
     let farmedMap = JSON.parse(localStorage.getItem(FARMED_KEY)) || {};
 
-    // 核心初始化
+    // 1. 获取数据
+    async function fetchData() {
+        try {
+            // 这里假设你的文件名是 data.json
+            const response = await fetch('data.json');
+            equipmentData = await response.json();
+            init();
+        } catch (error) {
+            console.error('无法读取 data.json:', error);
+            document.getElementById('filter-area').innerText = '错误：无法读取 data.json 文件，请确认文件是否存在于同一目录下。';
+        }
+    }
+
+    // 2. 核心初始化
     function init() {
         renderFilters();
         renderList();
@@ -169,6 +183,7 @@
 
     function renderFilters() {
         const container = document.getElementById('filter-area');
+        container.innerHTML = ''; // 清除加载提示
         for (const [groupName, tags] of Object.entries(filterConfig)) {
             const row = document.createElement('div');
             row.className = 'filter-row';
@@ -209,9 +224,9 @@
             );
         });
 
-        // 排序：按稀有度（这里简单按字母，因为刚好红色排在前面，或者你可以定义权重）
+        // 排序：按稀有度权重
         const weight = {"红色": 4, "金色": 3, "紫色": 2, "白色": 1};
-        filtered.sort((a, b) => weight[b["稀有度"]] - weight[a["稀有度"]]);
+        filtered.sort((a, b) => (weight[b["稀有度"]] || 0) - (weight[a["稀有度"]] || 0));
 
         filtered.forEach(item => {
             const card = document.createElement('div');
@@ -248,7 +263,8 @@
         localStorage.setItem(FARMED_KEY, JSON.stringify(farmedMap));
     }
 
-    init();
+    // 启动数据读取
+    fetchData();
 </script>
 </body>
 </html>
