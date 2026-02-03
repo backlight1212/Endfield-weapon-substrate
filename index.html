@@ -2,18 +2,16 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>终末地武器基质筛选器</title>
     <style>
         :root {
-            --bg-body: #f5f7fa; /* TableConvert 风格浅灰背景 */
+            --bg-body: #f5f7fa;
             --bg-block: #ffffff;
             --text-main: #333333;
             --text-dim: #666666;
             --accent: #007bff;
             --border: #e2e8f0;
-            
-            /* 稀有度颜色映射 */
             --color-红色: #ff4d4f;
             --color-金色: #faad14;
             --color-紫色: #a335ee;
@@ -29,10 +27,9 @@
         }
 
         .main-container { max-width: 900px; margin: 0 auto; }
-        
         h1 { text-align: center; font-weight: 500; margin-bottom: 30px; }
 
-        /* 白色区块分割 */
+        /* --- 筛选区块 --- */
         .white-block {
             background: var(--bg-block);
             border: 1px solid var(--border);
@@ -52,7 +49,6 @@
             justify-content: space-between;
         }
 
-        /* 筛选按钮 */
         .filter-row { margin-bottom: 15px; }
         .filter-label { font-size: 0.85rem; color: var(--text-dim); margin-bottom: 8px; }
         .filter-tags { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -67,13 +63,9 @@
             transition: all 0.2s;
         }
         .tag-btn:hover { background: #f8f9fa; }
-        .tag-btn.active {
-            background: var(--accent);
-            color: #fff;
-            border-color: var(--accent);
-        }
+        .tag-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
 
-        /* 装备卡片 */
+        /* --- 装备卡片 (默认：电脑端大气布局) --- */
         .item-card {
             display: flex;
             background: var(--bg-block);
@@ -181,40 +173,44 @@
 
     <div class="white-block">
         <div class="block-header">词条过滤</div>
-        <div id="filter-area">正在读取数据...</div>
+        <div id="filter-area">加载中...</div>
     </div>
 
     <div id="list-area"></div>
 </div>
 
 <script>
-    // 定义筛选器结构
+    // 词条配置 (以你现在的 index 为准)
     const filterConfig = {
-        "能力值提升": ["敏捷提升", "力量提升",  "意志提升", "智识提升", "主能力提升"],
+        "能力值提升": ["敏捷提升", "力量提升", "意志提升", "智识提升", "主能力提升"],
         "属性提升": ["攻击提升", "生命提升", "物理伤害提升", "灼热伤害提升", "电磁伤害提升", "寒冷伤害提升", "自然伤害提升", "暴击率提升", "源石技艺提升", "终结技效率提升", "法术伤害提升", "治疗效率提升"],
         "系列技能": ["强攻", "压制", "追袭", "粉碎", "昂扬", "巧技", "残暴", "附术", "医疗", "切骨", "进发", "夜幕", "流转", "效益"]
     };
 
-    // 状态管理
-    let equipmentData = []; // 用于存放从 json 加载的数据
+    // 本地预览数据
+    const localPreviewData = [
+        { "装备名称": "使命必达", "稀有度": "红色", "图片URL": "https://zmdwiki.com/assets/images/weapons/5d078dc9ff25d344de5629a76c3e7b6b.png", "能力值提升": "智识提升", "属性提升": "终结技效率提升", "系列技能": "追袭" },
+        { "装备名称": "艺术暴君", "稀有度": "红色", "图片URL": "https://zmdwiki.com/assets/images/weapons/66cc7d14dddc8b486364ce2363b6adda.png", "能力值提升": "智识提升", "属性提升": "暴击率提升", "系列技能": "切骨" },
+        { "装备名称": "不知归", "稀有度": "红色", "图片URL": "https://zmdwiki.com/assets/images/weapons/1f6c6779adca65f349b5ba0fede248cc.png", "能力值提升": "意志提升", "属性提升": "攻击提升", "系列技能": "流转" }
+    ];
+
+    let equipmentData = [];
     let selectedTags = new Set();
     const FARMED_KEY = 'endfield_farmed_v1';
     let farmedMap = JSON.parse(localStorage.getItem(FARMED_KEY)) || {};
 
-    // 1. 获取数据
     async function fetchData() {
         try {
-            // 这里假设你的文件名是 data.json
             const response = await fetch('data.json');
+            if (!response.ok) throw new Error();
             equipmentData = await response.json();
-            init();
         } catch (error) {
-            console.error('无法读取 data.json:', error);
-            document.getElementById('filter-area').innerText = '错误：无法读取 data.json 文件，请确认文件是否存在于同一目录下。';
+            console.warn("读取 data.json 失败，启用本地预览。");
+            equipmentData = localPreviewData;
         }
+        init();
     }
 
-    // 2. 核心初始化
     function init() {
         renderFilters();
         renderList();
@@ -222,15 +218,13 @@
 
     function renderFilters() {
         const container = document.getElementById('filter-area');
-        container.innerHTML = ''; // 清除加载提示
+        container.innerHTML = '';
         for (const [groupName, tags] of Object.entries(filterConfig)) {
             const row = document.createElement('div');
             row.className = 'filter-row';
             row.innerHTML = `<div class="filter-label">${groupName}</div>`;
-            
             const tagBox = document.createElement('div');
             tagBox.className = 'filter-tags';
-            
             tags.forEach(tag => {
                 const btn = document.createElement('button');
                 btn.className = 'tag-btn';
@@ -242,7 +236,6 @@
                 };
                 tagBox.appendChild(btn);
             });
-            
             row.appendChild(tagBox);
             container.appendChild(row);
         }
@@ -252,40 +245,34 @@
         const container = document.getElementById('list-area');
         container.innerHTML = '';
 
-        // 筛选逻辑
         const filtered = equipmentData.filter(item => {
             if (selectedTags.size === 0) return true;
-            // 检查 item 是否包含选中的所有标签
             return [...selectedTags].every(tag => 
-                item["能力值提升"] === tag || 
-                item["属性提升"] === tag || 
-                item["系列技能"] === tag
+                item["能力值提升"] === tag || item["属性提升"] === tag || item["系列技能"] === tag
             );
         });
 
-        // 排序：按稀有度权重
         const weight = {"红色": 4, "金色": 3, "紫色": 2, "白色": 1};
         filtered.sort((a, b) => (weight[b["稀有度"]] || 0) - (weight[a["稀有度"]] || 0));
 
         filtered.forEach(item => {
             const card = document.createElement('div');
             card.className = 'item-card';
-            
-            // 稀有度颜色获取：从 CSS 变量中读取
             const rColor = `var(--color-${item["稀有度"]})`;
 
+            // 注意：这里将名字和词条放在了 item-info-box 里，CSS 会控制它们垂直堆叠
             card.innerHTML = `
                 <div class="rarity-line" style="background: ${rColor}"></div>
                 <div class="item-icon">
-                    ${item["图片URL"] ? `<img src="${item["图片URL"]}">` : 'No Img'}
+                    ${item["图片URL"] ? `<img src="${item["图片URL"]}" loading="lazy">` : '无图片'}
                 </div>
-                <div class="item-name-box">
+                <div class="item-info-box">
                     <div class="item-name" style="color: ${rColor}">${item["装备名称"]}</div>
-                </div>
-                <div class="item-affixes">
-                    <span class="affix-text ${selectedTags.has(item["能力值提升"]) ? 'match' : ''}">${item["能力值提升"] || ''}</span>
-                    <span class="affix-text ${selectedTags.has(item["属性提升"]) ? 'match' : ''}">${item["属性提升"] || ''}</span>
-                    <span class="affix-text ${selectedTags.has(item["系列技能"]) ? 'match' : ''}">${item["系列技能"] || ''}</span>
+                    <div class="item-affixes">
+                        <span class="affix-text ${selectedTags.has(item["能力值提升"]) ? 'match' : ''}">${item["能力值提升"] || ''}</span>
+                        <span class="affix-text ${selectedTags.has(item["属性提升"]) ? 'match' : ''}">${item["属性提升"] || ''}</span>
+                        <span class="affix-text ${selectedTags.has(item["系列技能"]) ? 'match' : ''}">${item["系列技能"] || ''}</span>
+                    </div>
                 </div>
                 <div class="item-farm-check">
                     <input type="checkbox" ${farmedMap[item["装备名称"]] ? 'checked' : ''} 
@@ -302,10 +289,7 @@
         localStorage.setItem(FARMED_KEY, JSON.stringify(farmedMap));
     }
 
-    // 启动数据读取
     fetchData();
 </script>
 </body>
 </html>
-
-
