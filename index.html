@@ -51,7 +51,10 @@
 
         .filter-row { margin-bottom: 15px; }
         .filter-label { font-size: 0.85rem; color: var(--text-dim); margin-bottom: 8px; }
-        .filter-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+        .filter-tags { display: flex; flex-wrap: wrap; gap: 8px; 
+
+        .selected-chip:hover { background: #e6ecff; }
+        }
         
         .tag-btn {
             background: #fff;
@@ -195,7 +198,9 @@
     ];
 
     let equipmentData = [];
-    let selectedTags = new Set();
+    let selectedAbilityTags = new Set();
+    let selectedAttributeTag = null;
+    let selectedSeriesTag = null;
     const FARMED_KEY = 'endfield_farmed_v1';
     let farmedMap = JSON.parse(localStorage.getItem(FARMED_KEY)) || {};
 
@@ -219,23 +224,69 @@
     function renderFilters() {
         const container = document.getElementById('filter-area');
         container.innerHTML = '';
+
         for (const [groupName, tags] of Object.entries(filterConfig)) {
             const row = document.createElement('div');
             row.className = 'filter-row';
             row.innerHTML = `<div class="filter-label">${groupName}</div>`;
+
             const tagBox = document.createElement('div');
             tagBox.className = 'filter-tags';
+
+            // --- 1) 能力值提升：与模式（多选） ---
+            if (groupName === "能力值提升") {
+                tags.forEach(tag => {
+                    const btn = document.createElement('button');
+                    btn.textContent = tag;
+                    btn.dataset.group = groupName;
+                    btn.dataset.tag = tag;
+                    btn.className = 'tag-btn';
+                    if (selectedAbilityTags.has(tag)) btn.classList.add('active');
+
+                    btn.onclick = () => {
+                        // 多选：仅切换当前项
+                        if (selectedAbilityTags.has(tag)) {
+                            selectedAbilityTags.delete(tag);
+                            btn.classList.remove('active');
+                        } else {
+                            selectedAbilityTags.add(tag);
+                            btn.classList.add('active');
+                        }
+                        renderList();
+                    };
+                    tagBox.appendChild(btn);
+                });
+
+                row.appendChild(tagBox);
+                container.appendChild(row);
+                continue;
+            }
+
+            // --- 2) 属性提升 / 系列技能：非模式（单选） ---
+            const isAttribute = groupName === "属性提升";
+            const isSeries = groupName === "系列技能";
+
+            const getCurrent = () => (isAttribute ? selectedAttributeTag : selectedSeriesTag);
+            const setCurrent = (v) => { if (isAttribute) selectedAttributeTag = v; else selectedSeriesTag = v; };
+
             tags.forEach(tag => {
                 const btn = document.createElement('button');
                 btn.className = 'tag-btn';
                 btn.textContent = tag;
                 btn.onclick = () => {
-                    btn.classList.toggle('active');
-                    selectedTags.has(tag) ? selectedTags.delete(tag) : selectedTags.add(tag);
+                    const cur = getCurrent();
+                    const next = (cur === tag) ? null : tag;
+                    setCurrent(next);
+
+                    // 同组单选：清除其它 active
+                    [...tagBox.querySelectorAll('.tag-btn')].forEach(b => b.classList.remove('active'));
+                    if (next) btn.classList.add('active');
+
                     renderList();
                 };
                 tagBox.appendChild(btn);
             });
+
             row.appendChild(tagBox);
             container.appendChild(row);
         }
@@ -246,10 +297,14 @@
         container.innerHTML = '';
 
         const filtered = equipmentData.filter(item => {
-            if (selectedTags.size === 0) return true;
-            return [...selectedTags].every(tag => 
-                item["能力值提升"] === tag || item["属性提升"] === tag || item["系列技能"] === tag
-            );
+            // 组合逻辑：三组条件之间是 AND
+            // - 能力值提升：多选（组内 OR），只要命中任意一个即可
+            // - 属性提升：单选（等值）
+            // - 系列技能：单选（等值）
+            if (selectedAbilityTags.size > 0 && !selectedAbilityTags.has(item["能力值提升"])) return false;
+            if (selectedAttributeTag && item["属性提升"] !== selectedAttributeTag) return false;
+            if (selectedSeriesTag && item["系列技能"] !== selectedSeriesTag) return false;
+            return true;
         });
 
         const weight = {"红色": 4, "金色": 3, "紫色": 2, "白色": 1};
@@ -260,7 +315,10 @@
             card.className = 'item-card';
             const rColor = `var(--color-${item["稀有度"]})`;
 
-            // 注意：这里将名字和词条放在了 item-info-box 里，CSS 会控制它们垂直堆叠
+            const abilityMatch = selectedAbilityTags.size > 0 && selectedAbilityTags.has(item["能力值提升"]);
+            const attrMatch = !!selectedAttributeTag && item["属性提升"] === selectedAttributeTag;
+            const seriesMatch = !!selectedSeriesTag && item["系列技能"] === selectedSeriesTag;
+
             card.innerHTML = `
                 <div class="rarity-line" style="background: ${rColor}"></div>
                 <div class="item-icon">
@@ -269,9 +327,9 @@
                 <div class="item-info-box">
                     <div class="item-name" style="color: ${rColor}">${item["装备名称"]}</div>
                     <div class="item-affixes">
-                        <span class="affix-text ${selectedTags.has(item["能力值提升"]) ? 'match' : ''}">${item["能力值提升"] || ''}</span>
-                        <span class="affix-text ${selectedTags.has(item["属性提升"]) ? 'match' : ''}">${item["属性提升"] || ''}</span>
-                        <span class="affix-text ${selectedTags.has(item["系列技能"]) ? 'match' : ''}">${item["系列技能"] || ''}</span>
+                        <span class="affix-text ${abilityMatch ? 'match' : ''}">${item["能力值提升"] || ''}</span>
+                        <span class="affix-text ${attrMatch ? 'match' : ''}">${item["属性提升"] || ''}</span>
+                        <span class="affix-text ${seriesMatch ? 'match' : ''}">${item["系列技能"] || ''}</span>
                     </div>
                 </div>
                 <div class="item-farm-check">
